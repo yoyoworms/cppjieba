@@ -124,6 +124,10 @@ namespace CppJieba
                     LogError("_cut failed.");
                     return false;
                 }
+                cout<<__FILE__<<__LINE__<<endl;
+                print(segContext);
+                cout<<__FILE__<<__LINE__<<endl;
+                print(segWordInfos);
 
                 return true;
             }
