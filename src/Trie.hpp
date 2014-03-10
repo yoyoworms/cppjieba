@@ -66,7 +66,7 @@ namespace CppJieba
     {
         if(nodeInfo)
         {
-            return os << nodeInfo->word << nodeInfo->freq << nodeInfo->tag << nodeInfo->logFreq;
+            return os << nodeInfo->word <<":" << nodeInfo->freq <<":" << nodeInfo->tag <<":" << nodeInfo->logFreq;
         }
         return os << "NULL";
     }
