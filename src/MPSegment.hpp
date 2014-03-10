@@ -28,6 +28,10 @@ namespace CppJieba
         {
         }
     };
+    inline ostream & operator << (ostream& os, const SegmentChar& ch)
+    {
+        return os << ch.uniCh << ch.weight << ch.pInfo << ch.dag;
+    }
     typedef vector<SegmentChar> SegmentContext;
 
     class MPSegment: public SegmentBase
@@ -100,12 +104,15 @@ namespace CppJieba
                     LogError("_calcDAG failed.");
                     return false;
                 }
+                Unicode tmp(begin ,end);
+                print( tmp );
 
                 if(!_calcDP(segContext))
                 {
                     LogError("_calcDP failed.");
                     return false;
                 }
+                print(segContext);
 
                 if(!_cut(segContext, segWordInfos))
                 {

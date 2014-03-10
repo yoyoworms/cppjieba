@@ -62,6 +62,15 @@ namespace CppJieba
         return os << nodeInfo.word << ":" << nodeInfo.freq << ":" << nodeInfo.tag << ":" << nodeInfo.logFreq ;
     }
 
+    inline ostream& operator << (ostream& os, const TrieNodeInfo * nodeInfo)
+    {
+        if(nodeInfo)
+        {
+            return os << nodeInfo->word << nodeInfo->freq << nodeInfo->tag << nodeInfo->logFreq;
+        }
+        return os << "NULL";
+    }
+
     typedef unordered_map<uint, const TrieNodeInfo*> DagType;
 
     class Trie

@@ -29,24 +29,24 @@ const char * const HMM_DICT_FILE = "../dict/hmm_model.utf8";
 int main(int argc, char ** argv)
 {
     //demo
-    {
-        HMMSegment seg(HMM_DICT_FILE);
-        if(!seg)
-        {
-            cout<<"seg init failed."<<endl;
-            return EXIT_FAILURE;
-        }
-        cut(&seg, TEST_FILE);
-    }
-    {
-        MixSegment seg(JIEBA_DICT_FILE, HMM_DICT_FILE);
-        if(!seg)
-        {
-            cout<<"seg init failed."<<endl;
-            return EXIT_FAILURE;
-        }
-        cut(&seg, TEST_FILE);
-    }
+    //{
+    //    HMMSegment seg(HMM_DICT_FILE);
+    //    if(!seg)
+    //    {
+    //        cout<<"seg init failed."<<endl;
+    //        return EXIT_FAILURE;
+    //    }
+    //    cut(&seg, TEST_FILE);
+    //}
+    //{
+    //    MixSegment seg(JIEBA_DICT_FILE, HMM_DICT_FILE);
+    //    if(!seg)
+    //    {
+    //        cout<<"seg init failed."<<endl;
+    //        return EXIT_FAILURE;
+    //    }
+    //    cut(&seg, TEST_FILE);
+    //}
     {
         MPSegment seg(JIEBA_DICT_FILE);
         if(!seg)
