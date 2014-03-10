@@ -66,9 +66,11 @@ namespace CppJieba
     {
         if(nodeInfo)
         {
-            return os << nodeInfo->word <<":" << nodeInfo->freq <<":" << nodeInfo->tag <<":" << nodeInfo->logFreq;
+            string s;
+            s << nodeInfo->word;
+            return os << string_format("word:%s, freq:%u, tag:%s, logfreq:%g", s.c_str(), nodeInfo->freq, (nodeInfo->tag).c_str(), nodeInfo->logFreq);
         }
-        return os << "NULL";
+        return os << "[NULL]";
     }
 
     typedef unordered_map<uint, const TrieNodeInfo*> DagType;

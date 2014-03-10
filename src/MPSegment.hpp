@@ -30,7 +30,11 @@ namespace CppJieba
     };
     inline ostream & operator << (ostream& os, const SegmentChar& ch)
     {
-        return os << ":" << ch.uniCh <<":" << ch.weight <<":" << ch.pInfo <<":" << ch.dag;
+        string s1, s2;
+        s1 << ch.dag;
+        s2 << ch.pInfo ;
+        os << string_format("uniCh:%u, dag:%s, pInfo:%s, weight:%g", ch.uniCh, s1.c_str(), s2.c_str(), 0.0  );
+        return os;
     }
     typedef vector<SegmentChar> SegmentContext;
 
