@@ -108,6 +108,9 @@ namespace CppJieba
                 cout<<__FILE__<<__LINE__<<endl;
                 print( tmp );
 
+                cout<<__FILE__<<__LINE__<<endl;
+                print(segContext);
+
                 if(!_calcDP(segContext))
                 {
                     LogError("_calcDP failed.");
