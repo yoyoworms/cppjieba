@@ -33,7 +33,7 @@ namespace CppJieba
         string s1, s2;
         s1 << ch.dag;
         s2 << ch.pInfo ;
-        os << string_format("uniCh:%u, dag:%s, pInfo:%s, weight:%g", ch.uniCh, s1.c_str(), s2.c_str(), 0.0  );
+        os << string_format("uniCh:%u, dag:%s, pInfo:%s, weight:%g", ch.uniCh, s1.c_str(), s2.c_str(), ch.weight  );
         return os;
     }
     typedef vector<SegmentChar> SegmentContext;
