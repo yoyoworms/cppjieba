@@ -105,6 +105,7 @@ namespace CppJieba
                     return false;
                 }
                 Unicode tmp(begin ,end);
+                cout<<__FILE__<<__LINE__<<endl;
                 print( tmp );
 
                 if(!_calcDP(segContext))
@@ -112,6 +113,7 @@ namespace CppJieba
                     LogError("_calcDP failed.");
                     return false;
                 }
+                cout<<__FILE__<<__LINE__<<endl;
                 print(segContext);
 
                 if(!_cut(segContext, segWordInfos))
