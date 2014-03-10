@@ -109,29 +109,29 @@ namespace CppJieba
                     return false;
                 }
                 Unicode tmp(begin ,end);
-                cout<<__FILE__<<__LINE__<<endl;
-                print( tmp );
+                //cout<<__FILE__<<__LINE__<<endl;
+                //print( tmp );
 
-                cout<<__FILE__<<__LINE__<<endl;
-                print(segContext);
+                //cout<<__FILE__<<__LINE__<<endl;
+                //print(segContext);
 
                 if(!_calcDP(segContext))
                 {
                     LogError("_calcDP failed.");
                     return false;
                 }
-                cout<<__FILE__<<__LINE__<<endl;
-                print(segContext);
+                //cout<<__FILE__<<__LINE__<<endl;
+                //print(segContext);
 
                 if(!_cut(segContext, segWordInfos))
                 {
                     LogError("_cut failed.");
                     return false;
                 }
-                cout<<__FILE__<<__LINE__<<endl;
-                print(segContext);
-                cout<<__FILE__<<__LINE__<<endl;
-                print(segWordInfos);
+                //cout<<__FILE__<<__LINE__<<endl;
+                //print(segContext);
+                //cout<<__FILE__<<__LINE__<<endl;
+                //print(segWordInfos);
 
                 return true;
             }
