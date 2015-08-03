@@ -36,29 +36,33 @@ class ReqHandler: public IRequestHandler {
     return true;
   }
 
-  void run(const string& sentence, 
-           const string& method, 
+  void run(const string& sentence,
+           const string& method,
            const string& format,
            string& strSnd) const {
-    vector<string> words;
-    if ("MP" == method) {
-      app_.cut(sentence, words, CppJieba::METHOD_MP);
-    } else if ("HMM" == method) {
-      app_.cut(sentence, words, CppJieba::METHOD_HMM);
-    } else if ("MIX" == method) {
-      app_.cut(sentence, words, CppJieba::METHOD_MIX);
-    } else if ("FULL" == method) {
-      app_.cut(sentence, words, CppJieba::METHOD_FULL);
-    } else if ("QUERY" == method) {
-      app_.cut(sentence, words, CppJieba::METHOD_QUERY);
-    } else { // default
-      app_.cut(sentence, words, CppJieba::METHOD_MIX);
-    }
-    if(format == "simple") {
-      join(words.begin(), words.end(), strSnd, " ");
-    } else {
-      strSnd << words;
-    }
+    vector<pair<string, string> > tagres;
+    app_.tag(sentence, tagres);
+    strSnd << tagres;
+
+    // vector<string> words;
+    // if ("MP" == method) {
+    //   app_.cut(sentence, words, CppJieba::METHOD_MP);
+    // } else if ("HMM" == method) {
+    //   app_.cut(sentence, words, CppJieba::METHOD_HMM);
+    // } else if ("MIX" == method) {
+    //   app_.cut(sentence, words, CppJieba::METHOD_MIX);
+    // } else if ("FULL" == method) {
+    //   app_.cut(sentence, words, CppJieba::METHOD_FULL);
+    // } else if ("QUERY" == method) {
+    //   app_.cut(sentence, words, CppJieba::METHOD_QUERY);
+    // } else { // default
+    //   app_.cut(sentence, words, CppJieba::METHOD_MIX);
+    // }
+    // if(format == "simple") {
+    //   join(words.begin(), words.end(), strSnd, " ");
+    // } else {
+    //   strSnd << words;
+    // }
   }
  private:
   const CppJieba::Application& app_;
@@ -82,13 +86,13 @@ bool run(int argc, char** argv) {
   string stopWordsPath = conf.get("stop_words_path", "");
 
   LogInfo("config info: %s", conf.getConfigInfo().c_str());
-  
-  CppJieba::Application app(dictPath, 
-        modelPath, 
-        userDictPath, 
-        idfPath, 
+
+  CppJieba::Application app(dictPath,
+        modelPath,
+        userDictPath,
+        idfPath,
         stopWordsPath);
-  
+
   ReqHandler reqHandler(app);
   ThreadPoolServer sf(threadNumber, queueMaxSize, port, reqHandler);
   return sf.start();
