@@ -12,35 +12,40 @@ using namespace CppJieba;
 
 class ReqHandler: public IRequestHandler {
  public:
-  ReqHandler(const CppJieba::Application& app): app_(app) {
+  ReqHandler(CppJieba::Application& app): app_(app) {
   }
   virtual ~ReqHandler() {
   }
 
   virtual bool do_GET(const HttpReqInfo& httpReq, string& strSnd) const {
-    string sentence, method, format;
+    string sentence, words;
     string tmp;
-    vector<string> words;
-    httpReq.GET("key", tmp);
+    httpReq.GET("s", tmp);
     URLDecode(tmp, sentence);
-    httpReq.GET("method", method);
-    app_.cut(sentence, words, CppJieba::METHOD_MIX);
-    httpReq.GET("format", format);
-    run(sentence, method, format, strSnd);
+    httpReq.GET("w", tmp);
+    URLDecode(tmp, words);
+    run(sentence, words, "MIX", "simple", strSnd);
     return true;
   }
 
   virtual bool do_POST(const HttpReqInfo& httpReq, string& strSnd) const {
-    vector<string> words;
-    run(httpReq.getBody(), "MIX", "simple", strSnd);
+    string sentence, words;
+    run(sentence, words, "MIX", "simple", strSnd);
     return true;
   }
 
   void run(const string& sentence,
+           const string& words,
            const string& method,
            const string& format,
            string& strSnd) const {
     vector<pair<string, string> > tagres;
+    vector<string> newWords;
+    split(words, newWords, ",");
+    for(size_t i = 0; i < newWords.size(); i++) {
+      app_.insertUserWord(newWords[i], "n");
+    }
+
     app_.tag(sentence, tagres);
     strSnd << tagres;
 
@@ -65,7 +70,7 @@ class ReqHandler: public IRequestHandler {
     // }
   }
  private:
-  const CppJieba::Application& app_;
+  CppJieba::Application& app_;
 };
 
 bool run(int argc, char** argv) {

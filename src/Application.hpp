@@ -17,11 +17,11 @@ enum CutMethod {
 
 class Application {
  public:
-  Application(const string& dictPath, 
-              const string& modelPath, 
+  Application(const string& dictPath,
+              const string& modelPath,
               const string& userDictPath,
               const string& idfPath,
-              const string& stopWordsPath) 
+              const string& stopWordsPath)
     : dictTrie_(dictPath, userDictPath),
       model_(modelPath),
       mpSeg_(&dictTrie_),
@@ -29,13 +29,13 @@ class Application {
       mixSeg_(&dictTrie_, &model_),
       fullSeg_(&dictTrie_),
       querySeg_(&dictTrie_, &model_),
-      tagger_(&dictTrie_, &model_), 
-      extractor_(&dictTrie_, 
-                 &model_, 
+      tagger_(&dictTrie_, &model_),
+      extractor_(&dictTrie_,
+                 &model_,
                  idfPath,
                  stopWordsPath) {
   }
-  void cut(const string& sentence, vector<string>& words, 
+  void cut(const string& sentence, vector<string>& words,
         CutMethod method = METHOD_MIX) const {
     switch(method) {
       case METHOD_MP:
@@ -63,7 +63,7 @@ class Application {
   void tag(const string& str, vector<pair<string, string> >& res) const {
     tagger_.tag(str, res);
   }
-  void extract(const string& str, vector<pair<string, double> >& keyword, 
+  void extract(const string& str, vector<pair<string, double> >& keyword,
         size_t topN) const {
     extractor_.extract(str, keyword, topN);
   }
